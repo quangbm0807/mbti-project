@@ -38,6 +38,12 @@ export default function QuestionPage() {
   
   const currentQuestion = questions[currentQuestionIndex];
   
+  // Dịch câu hỏi và câu trả lời từ i18n
+  const translatedQuestionText = t(`question.questions.q${currentQuestion.id}.text`);
+  const translatedOptions = currentQuestion.options.map((_, index) => 
+    t(`question.questions.q${currentQuestion.id}.options.${index}`)
+  );
+  
   const handleOptionSelect = (optionIndex: number) => {
     answerQuestion(optionIndex);
   };
@@ -84,11 +90,11 @@ export default function QuestionPage() {
               className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8"
             >
               <h2 className="text-xl md:text-2xl font-semibold mb-8 text-center">
-                {currentQuestion.text}
+                {translatedQuestionText}
               </h2>
               
               <div className="space-y-2">
-                {currentQuestion.options.map((option, index) => (
+                {translatedOptions.map((option, index) => (
                   <AnswerOption
                     key={index}
                     text={option}
