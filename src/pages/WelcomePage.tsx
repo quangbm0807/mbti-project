@@ -3,12 +3,15 @@ import { motion } from 'framer-motion';
 import { Brain, User, Share2, RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/theme-toggle';
+import { LanguageSelector } from '@/components/LanguageSelector';
 import { useMBTI } from '@/context/MBTIContext';
 import PageTransition from '@/components/PageTransition';
+import { useTranslation } from 'react-i18next';
 
 export default function WelcomePage() {
   const navigate = useNavigate();
   const { startTest } = useMBTI();
+  const { t } = useTranslation();
   
   const handleStartTest = () => {
     startTest();
@@ -18,23 +21,23 @@ export default function WelcomePage() {
   const features = [
     {
       icon: <Brain className="h-6 w-6" />,
-      title: "Discover Your Type",
-      description: "Uncover your unique personality type through scientific questions."
+      title: t('welcome.features.discover.title'),
+      description: t('welcome.features.discover.description')
     },
     {
       icon: <User className="h-6 w-6" />,
-      title: "Self Awareness",
-      description: "Gain insights into your strengths, weaknesses, and preferences."
+      title: t('welcome.features.awareness.title'),
+      description: t('welcome.features.awareness.description')
     },
     {
       icon: <Share2 className="h-6 w-6" />,
-      title: "Share Results",
-      description: "Easily share your personality type with friends and family."
+      title: t('welcome.features.share.title'),
+      description: t('welcome.features.share.description')
     },
     {
       icon: <RefreshCw className="h-6 w-6" />,
-      title: "Retake Anytime",
-      description: "Come back and retake the test whenever you want to reevaluate."
+      title: t('welcome.features.retake.title'),
+      description: t('welcome.features.retake.description')
     }
   ];
   
@@ -46,7 +49,10 @@ export default function WelcomePage() {
             <Brain className="h-8 w-8 text-primary mr-2" />
             <h1 className="text-xl font-bold">MBTI Explorer</h1>
           </div>
-          <ThemeToggle />
+          <div className="flex gap-2">
+            <LanguageSelector />
+            <ThemeToggle />
+          </div>
         </header>
         
         <main className="flex-1 flex flex-col items-center justify-center px-4 py-12">
@@ -58,11 +64,10 @@ export default function WelcomePage() {
               className="text-center mb-12"
             >
               <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-500">
-                Discover Your Personality Type
+                {t('welcome.title')}
               </h1>
               <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-                Take the Myers-Briggs Type Indicator test to learn more about yourself,
-                your strengths, and your unique perspective on the world.
+                {t('welcome.subtitle')}
               </p>
             </motion.div>
             
@@ -77,7 +82,7 @@ export default function WelcomePage() {
                 className="text-xl px-8 py-6 rounded-full bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 transition-all duration-300 shadow-lg hover:shadow-xl"
                 onClick={handleStartTest}
               >
-                Start Your Test
+                {t('welcome.startButton')}
               </Button>
             </motion.div>
             
